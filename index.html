@@ -11,7 +11,63 @@
       <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
+
+
     <body>
-      <h1>Browser Template</h1>
+      <h1>TIC TAC TOE</h1>
+
+<div id="response"></div>
+
+    <div id="sign-up-screen">
+      <form id="sign-up">
+        <input required type="text" placeholder="Enter Your Email" name="credentials[email]">
+        <input required type="password" placeholder="Enter Your Password" name="credentials[password]">
+        <input required type="password" placeholder="Confirm Password" name="credentials[password_confirmation]">
+        <button type="submit">Sign up</button>
+      </form>
+    </div>
+
+     <div id="first-screen">
+        <form id="sign-in">
+          <input required type="text" placeholder="Enter Your Email" name="credentials[email]">
+          <input required type="password" placeholder="Enter Your Password" name="credentials[password]">
+          <button type="submit">Sign in!</button>
+          <!-- Link sign up button to show sign up screen later  -->
+          <!-- <button type="submit">Sign up</button> -->
+      </form>
+    </div>
+
+    <div id="change-password">
+      <form id="pass-change">
+          <input required name="passwords[old]" type="password" placeholder="Old password">
+          <input required name="passwords[new]" type="password" placeholder="New password">
+          <button type="submit">Confirm</button>
+      </form>
+    </div>
+      <div id="logged-in">
+      <form id="sign-out">
+        <button type="submit">Sign Out</button>
+      </form>
+      <!-- ask how to hide the button in the same click -->
+      <button id="chpw" onclick="$('#change-password').show()">Change Password</button>
+    </div>
+
+    <div class="container">
+      <h3 id="display-result"></h3>
+      <h1>Bootstrap game board</h1>
+        <div class="row">
+          <div id="0" class="col-4 box">location 0</div>
+          <div id="1" class="col-4 box">location 1</div>
+          <div id="2" class="col-4 box">location 2</div>
+          <div id="3" class="col-4 box">location 3</div>
+          <div id="4" class="col-4 box">location 4</div>
+          <div id="5" class="col-4 box">location 5</div>
+          <div id="6" class="col-4 box">location 6</div>
+          <div id="7" class="col-4 box">location 7</div>
+          <div id="8" class="col-4 box">location 8</div>
+      </div>
+    </div>
+
+
     </body>
 </html>

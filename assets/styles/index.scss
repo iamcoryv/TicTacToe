@@ -1,1 +1,31 @@
 @import '~bootstrap/scss/bootstrap';
+
+$alt-color: $blue;
+$body-bg-color: $gray-200;
+$font-color: $light;
+
+body {
+  background-color: $body-bg-color;
+}
+
+.container {
+ max-width: 500px;
+}
+
+.box {
+  align-items: center;
+  background-color: $secondary;
+  border: 1px solid $body-bg-color;
+  color: $font-color;
+  display: flex;
+  justify-content: center;
+  min-height: 166px;
+}
+
+.alt-color {
+  background-color: $alt-color;
+}
+
+h1 {
+  justify-content: center;
+}
