@@ -17,33 +17,38 @@ $(() => {
 
   const gameGrid = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 
-  // const co0 = document.querySelector('.co0')
-  // const co1 = document.querySelector('.co1')
-  // const co2 = document.querySelector('.co2')
-  // const co3 = document.querySelector('.co3')
-  // const co4 = document.querySelector('.co5')
-  // const co6 = document.querySelector('.co6')
-  // const co7 = document.querySelector('.co7')
-  // const co8 = document.querySelector('.co8')
-  const xString = []
-  const oString = []
-
-  let clickCount = 0
+  const xArray = [4,5,6,7,2,1]
+  const oArray = []
+  // const xArraySort = xArray.sort()
+  // const oArraySort = oArray.sort()
+let clickCount = 0
+let current = 0
 
   $('.box').on('click', function (event) {
     clickCount = (clickCount === 2) ? clickCount = 0 : clickCount
     if (clickCount === 0) {
       $(event.target).css({'background-color': 'red'})
-      xString.push(gameGrid[event.target.id])
+      current = event.target.id
+      xArray.push(gameGrid[event.target.id])
+    } else if (clickCount === 1 && current === event.target.id) {
+      $(event.target).css({'background-color': 'blue', 'pointer-events': 'none'})
+      oArray.push(gameGrid[event.target.id])
+      xArray.pop()
 
-    } else if (clickCount === 1) {
-      $(event.target).css({'background-color': 'blue'})
-      oString.push(gameGrid[event.target.id])
-      xString.pop()
     }
     clickCount++
-    $('#display-result').text(`ostring is currently ${oString}`)
-    $('#display-result').text(`xstring is currently ${xString}`)
-
+    $('#display-result').text(`oArray is ${oArray} and xArray is ${xArray}`)
   })
+  // if the string of xArray has these numbers in it
+  const winningCombos = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
+  function winCheck (array) {
+    for (let i = 0; i < winningCombos.length; i++) {
+      if (array.includes(winningCombos[i])) {
+        console.log(`x wins`)
+      } else {
+        console.log(`this function doesn't work`)
+      }
+    }
+  }
+  winCheck(xArray)
 })
