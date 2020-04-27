@@ -18,9 +18,10 @@ const onGameHistory = function () {
     .catch(ui.getGameFailure)
 }
 
-const onUpdate = function () {
+const onUpdate = function (updateGameTurn) {
   event.preventDefault()
-  api.updateGame()
+  console.log('game updated')
+  api.updateGame(updateGameTurn)
     .then(ui.updateSuccess)
     .catch(ui.updateFailure)
 }

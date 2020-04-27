@@ -8,7 +8,7 @@ const onSignUp = function (event) {
   event.preventDefault()
   const form = event.target
   const formData = getFormFields(form)
-  console.log(formData)
+  console.log('sign up worked')
 
   api.signUp(formData)
     .then(ui.signUpSuccess)
@@ -24,6 +24,7 @@ const onSignIn = function (event) {
     .then(ui.signInSuccess)
     .catch(ui.signInFailure)
 }
+
 const onSignOut = function (event) {
   event.preventDefault()
   console.log('signed out')

@@ -7,7 +7,6 @@ const signUpSuccess = function (data) {
   $('#response').removeClass()
   $('#response').addClass('success')
   console.log(`signUpSuccess ran. Data is:`, data)
-  $('#sign-up-screen, #sign-out, #change-password').hide()
   $('form').trigger('reset')
 }
 
@@ -24,10 +23,11 @@ const signInSuccess = function (data) {
   $('#response').removeClass()
   $('#response').addClass('success')
   console.log(`signInSuccess ran. Data is:`, data)
+  console.log('signed in')
   store.user = data.user
-
-  $('#first-screen, #sign-up-screen, #change-password').hide()
-  $('#sign-out, #chpw').show()
+  $('#first-screen').hide()
+  $('.chpwbutton, #username').show()
+  $('.navbar-user').text(`Hello ${data.user.email}`)
   $('#form').trigger('reset')
 }
 
@@ -44,7 +44,9 @@ const changePasswordSuccess = function (data) {
   $('#response').removeClass()
   $('#response').addClass('success')
   console.log(`changePasswordSuccess ran. Data is:`, data)
-  $('#change-password').hide()
+  // $('#change-password').hide()
+  $('#second-screen').hide()
+  $('.chowbutton').show()
   $('form').trigger('reset')
 }
 
@@ -64,8 +66,8 @@ const signOutSuccess = function () {
   console.log('signOutSuccess ran and nothing was returned!')
   // Hide the authenticated stuff, show the unauthenticated:
   // $('#authenticated').hide()
-  $('#first-screen').show()
-  $('#sign-out').hide()
+  // $('#first-screen').show()
+  // $('#sign-out').hide()
   store.user = null
 }
 

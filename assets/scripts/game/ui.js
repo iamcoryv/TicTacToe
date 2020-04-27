@@ -1,23 +1,27 @@
 'use strict'
 
 const store = require('../store')
-
-
+const api = require('./api')
 
 const createGameSuccess = function (data) {
   store.game = data.game
+  console.log('created game')
 }
 
 const createGameFailure = function () {
   $('#response').text(`Hmm that's weird, try again`)
+  console.log('did not create game')
 }
 
 const updateSuccess = function (event) {
   $('#response').text(`Saved!`)
+  console.log('updated')
 }
 
 const updateFailure = function (event) {
   $('#response').text(`Hmm couldn't update, lets try again`)
+  console.log('did not update')
+  console.log(`did not update ${store.game.id}`)
 }
 
 const getGameSuccess = function () {
@@ -31,12 +35,26 @@ const getGameFailure = function () {
 let gameGrid = ['', '', '', '', '', '', '', '', '']
 let theWinner = ''
 let gameCounter = 0
+let gameOver = false
+let currentTurn = ''
 
 let current = 0
+let gameGridIndex = current
 let xTurn = false
 
+function updateGameTurn () {
+  let thisMove = {game: {
+    cell: {
+      index: gameGridIndex,
+      value: currentTurn
+    },
+    over: gameOver
+  }
+  }
+}
+
 // refreshes the game
-$('#refresh').on('submit', function (event) {
+$('#refresh').on('submit', function refresh (event) {
   event.preventDefault()
   xTurn = false
   gameGrid = ['', '', '', '', '', '', '', '', '']
@@ -46,10 +64,14 @@ $('#refresh').on('submit', function (event) {
     'pointer-events': 'auto' })
   $('#game-result').text(``)
   $('.box').text(' ')
+  gameOver = false
   console.log(gameGrid, current, xTurn)
+  api.createGame()
+    .then(createGameSuccess)
+    .catch(createGameFailure)
 })
 // this controls the box clicks
-$('.box').on('click', function (event) {
+$('.box').on('click', function clickTime (event) {
   xTurn = !xTurn
   if (xTurn === true) {
     $(event.target).css({
@@ -58,16 +80,46 @@ $('.box').on('click', function (event) {
     })
     current = event.target.id
     gameGrid[event.target.id] = 'x'
+    currentTurn = 'x'
     $(event.target).text('x')
     dispayTurn()
+    // create object to send to API
+    const data = {
+      game: {
+        cell: {
+          index: current,
+          value: 'x'
+        },
+        over: gameOver
+      }
+    }
+    // pass object to API function
+    api.updateGame(data)
+      .then(updateSuccess)
+      .catch(updateFailure)
   } else if (xTurn === false) {
     $(event.target).css({
       'background-color': 'transparent',
       'pointer-events': 'none'
     })
     gameGrid[event.target.id] = 'o'
+    currentTurn = 'o'
     $(event.target).text('o')
     dispayTurn()
+    // create object to send to API
+    const data = {
+      game: {
+        cell: {
+          index: current,
+          value: 'o'
+        },
+        over: gameOver
+      }
+    }
+    // pass object to API function
+    api.updateGame(data)
+      .then(updateSuccess)
+      .catch(updateFailure)
   }
 
   // this is what happens when there is a winner
@@ -76,6 +128,7 @@ $('.box').on('click', function (event) {
     $('#game-result').text(`The winner is ${theWinner}!`)
     $('.box').css({
       'pointer-events': 'none'})
+    gameOver = true
   }
 // win checker
   function wincheck () {
@@ -150,6 +203,9 @@ module.exports = {
   updateFailure,
   updateSuccess,
   getGameSuccess,
-  getGameFailure
+  getGameFailure,
+  updateGameTurn,
+  dispayTurn
+
 
 }

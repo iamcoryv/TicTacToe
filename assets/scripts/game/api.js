@@ -8,12 +8,11 @@ const createGame = () => {
     method: 'POST',
     headers: {
       Authorization: 'Token token=' + store.user.token
-    },
-    data: '{}'
+    }
   })
 }
 
-const updateGame = (gameBoard, playerMove, over) => {
+const updateGame = () => {
   return $.ajax({
     url: config.apiUrl + '/games/' + store.game.id,
     method: 'PATCH',
@@ -23,10 +22,10 @@ const updateGame = (gameBoard, playerMove, over) => {
     data: {
       game: {
         cell: {
-          index: gameBoard,
-          value: playerMove
+          index: 'index',
+          value: 'value'
         },
-        over: over
+        over: 'over'
       }
     }
   })
