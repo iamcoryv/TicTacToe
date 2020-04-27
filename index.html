@@ -15,6 +15,12 @@
 
     <body>
 
+      <nav class="navbar fixed-top navbar-dark bg-dark">
+
+    <!-- Navbar content -->
+      </nav>
+
+    <div id="response"></div>
     <div id="sign-up-screen">
       <form id="sign-up">
         <input required type="text" placeholder="Enter Your Email" name="credentials[email]">
@@ -49,28 +55,28 @@
       <button id="chpw" onclick="$('#change-password').show()">Change Password</button>
     </div>
 
-    <div class="container">
+    <section class="container">
       <div class="row title">
         <div class="col-12 text-center"><h1>TIC TAC TOE</h1> </div>
         <div class="col-12 text-center"><h2 id="game-result"></h2></div>
-        <div class="col-12 text-center" id="response"></div>
+        <div class="col-12 text-center"><h2 id="currentPlayer">Go Player X</h2></div>
         <form id="refresh">
-        <button type="submit">New Game</button>
+        <button type="submit">Start Game</button>
         </form>
         <!-- <h3 id="display-result"></h3> -->
       </div>
         <div class="row game">
-          <div id="0" class="col-4 box">location 0</div>
-          <div id="1" class="col-4 box">location 1</div>
-          <div id="2" class="col-4 box">location 2</div>
-          <div id="3" class="col-4 box">location 3</div>
-          <div id="4" class="col-4 box">location 4</div>
-          <div id="5" class="col-4 box">location 5</div>
-          <div id="6" class="col-4 box">location 6</div>
-          <div id="7" class="col-4 box">location 7</div>
-          <div id="8" class="col-4 box">location 8</div>
+          <div id="0" class="col-4 box"></div>
+          <div id="1" class="col-4 box"></div>
+          <div id="2" class="col-4 box"></div>
+          <div id="3" class="col-4 box"></div>
+          <div id="4" class="col-4 box"></div>
+          <div id="5" class="col-4 box"></div>
+          <div id="6" class="col-4 box"></div>
+          <div id="7" class="col-4 box"></div>
+          <div id="8" class="col-4 box"></div>
       </div>
-    </div>
+    </section>
 
 
     </body>
