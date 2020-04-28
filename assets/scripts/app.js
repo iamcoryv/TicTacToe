@@ -7,7 +7,6 @@
 // require('./example')
 const authEvents = require('./auth/events.js')
 const gameEvents = require('./game/events.js')
-const ui = require('./game/ui.js')
 
 $(() => {
   $('#change-password, #second-screen, .chpwbutton, .sign-out-button, .theBeef, .game').hide()

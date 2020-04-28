@@ -30,9 +30,9 @@ const getGameSuccess = function (data) {
   let gamesPlayed = $(data.games).toArray().length
   // $('.response').text(`${gamesPlayed}`)
   $(document).ready(function () {
-     $('[data-toggle="popover"]').popover()
+    $('[data-toggle="popover"]').popover()
     $('.popover1').popover({title: 'Header', content: `You have played ${gamesPlayed} game(s)!`})
-})
+  })
   // console.log(data.games)
 }
 
@@ -66,7 +66,7 @@ $('#refresh').on('submit', function refresh (event) {
   api.createGame()
     .then(createGameSuccess)
     .catch(createGameFailure)
-    dispayTurn ()
+  dispayTurn()
 })
 // this controls the box clicks
 $('.box').on('click', function clickTime (event) {
