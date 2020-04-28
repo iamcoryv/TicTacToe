@@ -1,6 +1,5 @@
 'use strict'
 
-const getFormFields = require('../../../lib/get-form-fields.js')
 const api = require('./api')
 const ui = require('./ui')
 
@@ -17,17 +16,17 @@ const onGameHistory = function () {
     .then(ui.getGameSuccess)
     .catch(ui.getGameFailure)
 }
-
-const onUpdate = function (updateGameTurn) {
-  event.preventDefault()
-  console.log('game updated')
-  api.updateGame(updateGameTurn)
-    .then(ui.updateSuccess)
-    .catch(ui.updateFailure)
-}
+//
+// const onUpdate = function (data) {
+//   event.preventDefault()
+//   console.log('game updated')
+//   api.updateGame(data)
+//     .then(ui.updateSuccess)
+//     .catch(ui.updateFailure)
+// }
 
 module.exports = {
   onCreate,
-  onGameHistory,
-  onUpdate
+  onGameHistory
+  // onUpdate
 }

@@ -5,53 +5,49 @@ const api = require('./api')
 
 const createGameSuccess = function (data) {
   store.game = data.game
-  console.log('created game')
+  $('.response').text(`Started New Game! Good Luck.`)
+  // console.log('created game')
+  $('.game').show()
 }
 
 const createGameFailure = function () {
-  $('#response').text(`Hmm that's weird, try again`)
-  console.log('did not create game')
+  $('.response').text(`Hmm that's weird, try again`)
+  // console.log('did not create game')
 }
 
 const updateSuccess = function (event) {
-  $('#response').text(`Saved!`)
-  console.log('updated')
+  $('.response').text(`Move Made`)
+  // console.log('updated')
 }
 
 const updateFailure = function (event) {
-  $('#response').text(`Hmm couldn't update, lets try again`)
-  console.log('did not update')
-  console.log(`did not update ${store.game.id}`)
+  $('.response').text(`Hmm couldn't update, lets try again`)
+  // console.log('did not update')
+  // console.log(`did not update ${store.game.id}`)
 }
 
-const getGameSuccess = function () {
-  $('#response').text(`Here ya go!`)
+const getGameSuccess = function (data) {
+  let gamesPlayed = $(data.games).toArray().length
+  // $('.response').text(`${gamesPlayed}`)
+  $(document).ready(function () {
+     $('[data-toggle="popover"]').popover()
+    $('.popover1').popover({title: 'Header', content: `You have played ${gamesPlayed} game(s)!`})
+})
+  // console.log(data.games)
 }
 
 const getGameFailure = function () {
-  $('#response').text(`I couldn't get your games :(`)
+  $('.response').text(`I couldn't get your games :(`)
 }
 
 let gameGrid = ['', '', '', '', '', '', '', '', '']
 let theWinner = ''
 let gameCounter = 0
 let gameOver = false
-let currentTurn = ''
+let currentTurn = null
 
 let current = 0
-let gameGridIndex = current
 let xTurn = false
-
-function updateGameTurn () {
-  let thisMove = {game: {
-    cell: {
-      index: gameGridIndex,
-      value: currentTurn
-    },
-    over: gameOver
-  }
-  }
-}
 
 // refreshes the game
 $('#refresh').on('submit', function refresh (event) {
@@ -65,10 +61,12 @@ $('#refresh').on('submit', function refresh (event) {
   $('#game-result').text(``)
   $('.box').text(' ')
   gameOver = false
-  console.log(gameGrid, current, xTurn)
+  let emptySpaces = 0
+  // console.log(gameGrid, current, xTurn)
   api.createGame()
     .then(createGameSuccess)
     .catch(createGameFailure)
+    dispayTurn ()
 })
 // this controls the box clicks
 $('.box').on('click', function clickTime (event) {
@@ -88,7 +86,7 @@ $('.box').on('click', function clickTime (event) {
       game: {
         cell: {
           index: current,
-          value: 'x'
+          value: currentTurn
         },
         over: gameOver
       }
@@ -106,20 +104,6 @@ $('.box').on('click', function clickTime (event) {
     currentTurn = 'o'
     $(event.target).text('o')
     dispayTurn()
-    // create object to send to API
-    const data = {
-      game: {
-        cell: {
-          index: current,
-          value: 'o'
-        },
-        over: gameOver
-      }
-    }
-    // pass object to API function
-    api.updateGame(data)
-      .then(updateSuccess)
-      .catch(updateFailure)
   }
 
   // this is what happens when there is a winner
@@ -130,7 +114,8 @@ $('.box').on('click', function clickTime (event) {
       'pointer-events': 'none'})
     gameOver = true
   }
-// win checker
+
+  // win checker
   function wincheck () {
     if (gameGrid[0] === 'x' && gameGrid[1] === 'x' && gameGrid[2] === 'x') {
       theWinner = 'Player X '
@@ -180,13 +165,12 @@ $('.box').on('click', function clickTime (event) {
     } else if (gameGrid[0] === 'o' && gameGrid[1] === 'o' && gameGrid[2] === 'o') {
       theWinner = 'Player O '
       gameFinish()
+    } else {
+      tieCheck()
     }
-    // else {
-    //   $('#game-result').text(`Its a Tie!`)
-    // }
   }
   wincheck()
-  console.log(theWinner, gameCounter)
+  // console.log(theWinner, gameCounter)
 })
 
 function dispayTurn () {
@@ -197,6 +181,22 @@ function dispayTurn () {
   }
 }
 
+function tieCheck () {
+  let emptySpaces = 0
+  for (let i = 0; i < gameGrid.length; i++) {
+    // chcek for empty spaces
+    if (gameGrid[i] !== '') {
+      emptySpaces += 1
+    }
+  }
+  if (emptySpaces === 9) {
+    $('#game-result').text(`It's a tie!`)
+    $('.box').css({
+      'pointer-events': 'none'})
+    gameOver = true
+  }
+}
+
 module.exports = {
   createGameSuccess,
   createGameFailure,
@@ -204,8 +204,5 @@ module.exports = {
   updateSuccess,
   getGameSuccess,
   getGameFailure,
-  updateGameTurn,
   dispayTurn
-
-
 }

@@ -3,79 +3,70 @@
 const store = require('../store')
 
 const signUpSuccess = function (data) {
-  $('#response').text('Signed up successfully!')
-  $('#response').removeClass()
-  $('#response').addClass('success')
-  console.log(`signUpSuccess ran. Data is:`, data)
+  $('.response').text('Signed up successfully!')
+  // console.log(`signUpSuccess ran. Data is:`, data)
   $('form').trigger('reset')
+  $('#close-modal').click()
 }
 
-const signUpFailure = function (error) {
-  $('#response').text('Sign up failed!')
-  $('#response').removeClass()
-  $('#response').addClass('failure')
-  console.log(`signUpFailure ran. Error is:`, error)
+const signUpFailure = function () {
+  $('.response').text('Sign up failed!')
+  $('.response').addClass('failure')
+  // console.log(`signUpFailure ran. Error is:`, error)
   $('form').trigger('reset')
 }
 
 const signInSuccess = function (data) {
-  $('#response').text('Signed in successfully!')
-  $('#response').removeClass()
-  $('#response').addClass('success')
-  console.log(`signInSuccess ran. Data is:`, data)
-  console.log('signed in')
+  $('.response').text('Signed in successfully!')
+  // console.log(`signInSuccess ran. Data is:`, data)
+  // console.log('signed in')
   store.user = data.user
-  $('#first-screen').hide()
-  $('.chpwbutton, #username').show()
+  $('#first-screen, .signed-out-screen').hide()
+  $('.chpwbutton, #username, .sign-out-button, .navbar-user').show()
+  $('#sign-out, .sign-out-button, .theBeef').show()
   $('.navbar-user').text(`Hello ${data.user.email}`)
   $('#form').trigger('reset')
 }
 
-const signInFailure = function (error) {
-  $('#response').text('Wrong Username or Password!')
-  $('#response').removeClass()
-  $('#response').addClass('failure')
-  console.log(`signInFailure ran. Error is:`, error)
+const signInFailure = function () {
+  $('.response').text('Wrong Username or Password!')
+  $('.response').addClass('failure')
+  // console.log(`signInFailure ran. Error is:`, error)
   $('form').trigger('reset')
 }
 
 const changePasswordSuccess = function (data) {
-  $('#response').text('Changed password successfully!')
-  $('#response').removeClass()
-  $('#response').addClass('success')
-  console.log(`changePasswordSuccess ran. Data is:`, data)
-  // $('#change-password').hide()
+  $('.response').text('Changed password successfully!')
+  // console.log(`changePasswordSuccess ran. Data is:`, data)
   $('#second-screen').hide()
-  $('.chowbutton').show()
+  $('.chpwbutton').show()
+  $('.navbar-user').show()
+  $('#sign-out, .sign-out-button').show()
   $('form').trigger('reset')
 }
 
-const changePasswordFailure = function (error) {
-  $('#response').text('Change password failed!')
-  $('#response').removeClass()
-  $('#response').addClass('failure')
-  console.log(`changePasswordFailure ran. Error is:`, error)
+const changePasswordFailure = function () {
+  $('.response').text('Change password failed!')
+  $('.response').addClass('failure')
+  // console.log(`changePasswordFailure ran. Error is:`, error)
   $('form').trigger('reset')
 }
 
 const signOutSuccess = function () {
-  $('#response').text('Signed out successfully')
-  $('#response').removeClass()
-  $('#response').addClass('success')
+  $('.response').text('Signed out successfully')
   $('form').trigger('reset')
-  console.log('signOutSuccess ran and nothing was returned!')
+  // console.log('signOutSuccess ran and nothing was returned!')
   // Hide the authenticated stuff, show the unauthenticated:
   // $('#authenticated').hide()
-  // $('#first-screen').show()
-  // $('#sign-out').hide()
+  $('#first-screen, .signed-out-screen').show()
+  $('#sign-out, .navbar-user, .chpwbutton, .theBeef').hide()
   store.user = null
 }
 
-const signOutFailure = function (error) {
-  $('#response').text('Could not sign out, you must play forever')
-  $('#response').removeClass()
-  $('#response').addClass('failure')
-  console.error('signOutFailure ran. Error is :', error)
+const signOutFailure = function () {
+  $('.response').text('Could not sign out, you must play forever')
+  $('.response').addClass('failure')
+  // console.error('signOutFailure ran. Error is :', error)
 }
 
 module.exports = {

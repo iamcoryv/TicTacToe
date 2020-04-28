@@ -4,10 +4,16 @@ $alt-color: $blue;
 $body-bg-color: $gray-200;
 $font-color: $light;
 
+body {
+  background-color: #DCDCDC;
+}
+
 .container {
   // max-width: 500px;
  height: 85vh;
  padding-bottom: 50px;
+  padding-top: 50px;
+
 
 }
 
@@ -35,14 +41,14 @@ $font-color: $light;
   display: flex;
   align-items: center;
   justify-content: center;
-  align-items: center;
   min-height: calc(100% / 3);
-  background-color: white;
+  background-color:	#DCDCDC;
   text-shadow: 2px 2px rgba(0 , 0, 0, .50);
   font-size: 15vh;
   line-height: 10px;
   user-select: none;
   color: white;
+
 
 
   &:nth-child(3n) {
@@ -60,11 +66,40 @@ $font-color: $light;
   background-color: $alt-color;
 }
 
+#currentPlayer {
+  color:#343a40;
+}
+
+.signed-out-screen {
+  text-align: center;
+  padding-top: 200px;
+}
+
+.title-first {
+font-size: 120px;
+color: grey;
+}
+
+span {
+  color:white;
+}
 
 
+p {
+  font-size: 20px;
+  color:#343a40;
+}
 .chpwbutton {
   padding-left: 10px;
 }
+
+.sign-out-button {
+  padding-left: 10px;
+}
+.navbar {
+   box-shadow: 0 4px 2px -2px rgba(0,0,0,.3);
+}
+
 #second-screen {
   display: inline;
 }
@@ -78,4 +113,13 @@ $font-color: $light;
     color: white;
     text-decoration: none;
   }
+}
+
+.stats {
+  padding: 20px 0 0 20px;
+}
+
+.response {
+  padding-left: 20px;
+  padding-top: 20px;
 }

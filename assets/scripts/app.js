@@ -7,15 +7,23 @@
 // require('./example')
 const authEvents = require('./auth/events.js')
 const gameEvents = require('./game/events.js')
+const ui = require('./game/ui.js')
 
 $(() => {
-  $('#change-password, #sign-out, #second-screen, .chpwbutton').hide()
-  $('.sign-up').on('submit', authEvents.onSignUp)
+  $('#change-password, #second-screen, .chpwbutton, .sign-out-button, .theBeef, .game').hide()
+  $('#sign-up-confirm').on('submit', authEvents.onSignUp)
   $('.sign-in').on('submit', authEvents.onSignIn)
   $('.change-password').on('submit', authEvents.onChangePassword)
   $('#sign-out').on('submit', authEvents.onSignOut)
   $('#chpw').on('submit', authEvents.showChpw)
   $('.chpwbutton').click(function () {
     $('#second-screen').show()
+    $('.navbar-user').hide()
   })
+
+  $('#get-games').on('click', gameEvents.onGameHistory)
+  $('.stats').on('click', gameEvents.onGameHistory)
+
+  $('[data-toggle="popover"]').popover()
+  $('.alert').alert()
 })
