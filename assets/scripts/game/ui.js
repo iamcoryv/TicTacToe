@@ -11,7 +11,7 @@ const createGameSuccess = function (data) {
 }
 
 const createGameFailure = function () {
-  $('.response').text(`Hmm that's weird, try again`)
+  // $('.response').text(`Hmm that's weird, try again`)
   // console.log('did not create game')
 }
 
@@ -50,7 +50,7 @@ let current = 0
 let xTurn = false
 
 // refreshes the game
-$('#refresh').on('submit', function refresh (event) {
+function refresh (event) {
   event.preventDefault()
   xTurn = false
   gameGrid = ['', '', '', '', '', '', '', '', '']
@@ -67,7 +67,7 @@ $('#refresh').on('submit', function refresh (event) {
     .then(createGameSuccess)
     .catch(createGameFailure)
   dispayTurn()
-})
+}
 // this controls the box clicks
 $('.box').on('click', function clickTime (event) {
   xTurn = !xTurn
@@ -204,5 +204,6 @@ module.exports = {
   updateSuccess,
   getGameSuccess,
   getGameFailure,
-  dispayTurn
+  dispayTurn,
+  refresh
 }

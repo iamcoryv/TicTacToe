@@ -1,6 +1,7 @@
 'use strict'
 
 const store = require('../store')
+const ui = require('../game/ui')
 
 const signUpSuccess = function (data) {
   $('.response').text('Signed up successfully!')
@@ -22,6 +23,7 @@ const signInSuccess = function (data) {
   // console.log('signed in')
   store.user = data.user
   $('#first-screen, .signed-out-screen').hide()
+
   $('.chpwbutton, #username, .sign-out-button, .navbar-user').show()
   $('#sign-out, .sign-out-button, .theBeef').show()
   $('.navbar-user').text(`Hello ${data.user.email}`)
@@ -39,9 +41,7 @@ const changePasswordSuccess = function (data) {
   $('.response').text('Changed password successfully!')
   // console.log(`changePasswordSuccess ran. Data is:`, data)
   $('#second-screen').hide()
-  $('.chpwbutton').show()
-  $('.navbar-user').show()
-  $('#sign-out, .sign-out-button').show()
+  $('#sign-out, .sign-out-button, .navbar-user, .chpwbutton ').show()
   $('form').trigger('reset')
 }
 
@@ -52,6 +52,11 @@ const changePasswordFailure = function () {
   $('form').trigger('reset')
 }
 
+const onCancel = function () {
+  $('#second-screen').hide()
+  $('#sign-out, .sign-out-button, .navbar-user, .chpwbutton ').show()
+}
+
 const signOutSuccess = function () {
   $('.response').text('Signed out successfully')
   $('form').trigger('reset')
@@ -59,7 +64,7 @@ const signOutSuccess = function () {
   // Hide the authenticated stuff, show the unauthenticated:
   // $('#authenticated').hide()
   $('#first-screen, .signed-out-screen').show()
-  $('#sign-out, .navbar-user, .chpwbutton, .theBeef').hide()
+  $('#sign-out, .navbar-user, .chpwbutton, .theBeef, .game, #second-screen').hide()
   store.user = null
 }
 
@@ -77,6 +82,6 @@ module.exports = {
   changePasswordFailure,
   changePasswordSuccess,
   signOutFailure,
-  signOutSuccess
-
+  signOutSuccess,
+  onCancel
 }
