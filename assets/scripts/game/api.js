@@ -14,16 +14,16 @@ const createGame = () => {
 
 const updateGame = (data) => {
   return $.ajax({
-    url: config.apiUrl + '/games/' + store.game.id,
+    url: config.apiUrl + '/games/' + store.games.id,
     method: 'PATCH',
+    data,
     headers: {
       Authorization: 'Token token=' + store.user.token
-    },
-    data: data
+    }
   })
 }
 
-const getGames = data => {
+const getGames = (data) => {
   return $.ajax({
     url: config.apiUrl + `/games`,
     method: 'GET',

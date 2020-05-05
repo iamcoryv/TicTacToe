@@ -28,8 +28,10 @@ $(() => {
   $('#refresh').on('submit', function () {
     $('.stats').show()
   })
-  $('.stats').on('click', gameEvents.onGameHistory)
+  // // $('.stats').on('click', gameEvents.onGameHistory)
+  // $('.popover1').popover()
+  // //
+  $('.stats1').on('click', gameEvents.onGameHistory)
   $('#Cancel').on('submit', authEvents.onCancel)
-  $('[data-toggle="popover"]').popover()
   $('.alert').alert()
 })

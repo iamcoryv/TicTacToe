@@ -22,7 +22,7 @@ const signInSuccess = function (data) {
   // console.log(`signInSuccess ran. Data is:`, data)
   // console.log('signed in')
   store.user = data.user
-  $('#first-screen, .signed-out-screen').hide()
+  $('#first-screen, .signed-out-screen, .stats').hide()
 
   $('.chpwbutton, #username, .sign-out-button, .navbar-user').show()
   $('#sign-out, .sign-out-button, .theBeef').show()

@@ -3,15 +3,16 @@
 const api = require('./api')
 const ui = require('./ui')
 
-const onCreate = function () {
+const onCreate = function (event) {
   event.preventDefault()
   api.createGame()
     .then(ui.createGameSuccess)
     .catch(ui.createGameFailure)
 }
 
-const onGameHistory = function () {
+const onGameHistory = function (event) {
   event.preventDefault()
+  console.log(event)
   api.getGames()
     .then(ui.getGameSuccess)
     .catch(ui.getGameFailure)

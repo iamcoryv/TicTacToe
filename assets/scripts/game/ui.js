@@ -4,10 +4,10 @@ const store = require('../store')
 const api = require('./api')
 
 const createGameSuccess = function (data) {
-  store.game = data.game
+  store.games = data.game
   $('.response').text(`Started New Game! Good Luck.`)
   // console.log('created game')
-  $('.game').show()
+  $('.game, .stats').show()
 }
 
 const createGameFailure = function () {
@@ -27,13 +27,10 @@ const updateFailure = function (event) {
 }
 
 const getGameSuccess = function (data) {
-  let gamesPlayed = $(data.games).toArray().length
-  // $('.response').text(`${gamesPlayed}`)
-  $(document).ready(function () {
-    $('[data-toggle="popover"]').popover()
-    $('.popover1').popover({title: 'Header', content: `You have played ${gamesPlayed} game(s)!`})
-  })
-  // console.log(data.games)
+  console.log('hello')
+  const gamesPlayed = data.games.length
+  console.log(data.games)
+  $('.gamesPlayedTotal').html(`<h4>You have played ${gamesPlayed} game(s)!</h4>`)
 }
 
 const getGameFailure = function () {
@@ -42,7 +39,7 @@ const getGameFailure = function () {
 
 let gameGrid = ['', '', '', '', '', '', '', '', '']
 let theWinner = ''
-let gameCounter = 0
+// let gameCounter = 0
 let gameOver = false
 let currentTurn = null
 
@@ -61,7 +58,7 @@ function refresh (event) {
   $('#game-result').text(``)
   $('.box').text(' ')
   gameOver = false
-  let emptySpaces = 0
+  // let emptySpaces = 0
   // console.log(gameGrid, current, xTurn)
   api.createGame()
     .then(createGameSuccess)
@@ -95,6 +92,7 @@ $('.box').on('click', function clickTime (event) {
     api.updateGame(data)
       .then(updateSuccess)
       .catch(updateFailure)
+    console.log(data)
   } else if (xTurn === false) {
     $(event.target).css({
       'background-color': 'transparent',
@@ -104,11 +102,25 @@ $('.box').on('click', function clickTime (event) {
     currentTurn = 'o'
     $(event.target).text('o')
     dispayTurn()
+    const data = {
+      game: {
+        cell: {
+          index: current,
+          value: currentTurn
+        },
+        over: gameOver
+      }
+    }
+    // pass object to API function
+    api.updateGame(data)
+      .then(updateSuccess)
+      .catch(updateFailure)
+    console.log(data)
   }
 
   // this is what happens when there is a winner
   function gameFinish () {
-    gameCounter += 1
+    // gameCounter += 1
     $('#game-result').text(`The winner is ${theWinner}!`)
     $('.box').css({
       'pointer-events': 'none'})
