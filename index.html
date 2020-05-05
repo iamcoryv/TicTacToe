@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Example</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <!-- Do not add `link` tags-->
+      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+      <!-- Do not add `script` tags-->
+      <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+      <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+    </head>
+
+
+
+
+
+    <body>
+      <!-- nav bar -->
+      <nav class="navbar navbar-default navbar-static-top navbar-dark bg-dark">
+        <form class="form-inline sign-in">
+           <div class="input-group">
+             <div class="input-group-prepend">
+             </div>
+             <div id="first-screen">
+                  <input class="form-control" required type="text" placeholder="Enter Your Email" name="credentials[email]">
+                  <input class="form-control" required type="password" placeholder="Enter Your Password" name="credentials[password]">
+                  <button class="btn btn-sm btn-outline-secondary form-control" type="submit">Sign in</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary form-control" data-toggle="modal" data-target="#sign-up-modal" >Sign Up</button>
+           </div>
+
+         </form>
+         <form class="form-inline change-password">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                </div>
+                  <div id="second-screen" class="form-inline">
+                    <input class="form-control pwch" required name="passwords[old]" type="password" placeholder="Old password">
+                    <input class="form-control pwch" required name="passwords[new]" type="password" placeholder="New password">
+                    <button id="confirmpw" type="sumbit" class="btn btn-sm btn-outline-secondary form-control">Confirm</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary form-control cancel">Cancel</button>
+
+                  </div>
+                  <div  class="form-inline" id="username">
+                  <a class="navbar-user" href="#"></a>
+                  <div class="chpwbutton">
+                    <button type="button" class="btn btn-sm btn-outline-secondary form-control">Change Password</button>
+                  </div>
+                  </div>
+                </div>
+        </form>
+        <!-- <form class="form-inline" class="cancel">
+          <div class="cancel">
+            <button type="sumbit" class="btn btn-sm btn-outline-secondary form-control cancel">Cancel</button>
+          </div> -->
+
+        <form class="form-inline" id="sign-out">
+          <div class="sign-out-button">
+            <button type="submit" class="btn btn-sm btn-outline-secondary form-control">Sign Out</button>
+          </div>
+
+        </form>
+      </nav>
+<!-- Modal for sign up  -->
+      <div class="modal fade" id="sign-up-modal" tabindex="-1" role="dialog"  aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" >Sign Up</h5>
+                <span aria-hidden="true">&times;</span
+                  </button>
+            </div>
+            <div class="modal-body">
+              <form class="sign-up" id="sign-up-confirm">
+                <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">Email</label>
+                  <input class="form-control" required type="text" placeholder="Enter Your Email" name="credentials[email]">
+                </div>
+                <div class="form-group">
+                  <label for="message-text" class="col-form-label">Password</label>
+                  <input class="form-control"  required type="password" placeholder="Enter Your Password" name="credentials[password]">
+                </div>
+                <div class="form-group">
+                  <label for="message-text" class="col-form-label">Confirm Password</label>
+                  <input class="form-control"  required type="password" placeholder="Confirm Password" name="credentials[password_confirmation]">
+                </div>
+
+            <div class="modal-footer">
+              <button id="close-modal" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-outline-secondary sign-up-button">Confirm</button>
+            </div>
+              </form>
+        </div>
+          </div>
+        </div>
+      </div>
+      <div class="response alert fade show alert-dark" role="alert"></div>
+
+<div class="signed-out-screen">
+<h2 class="title-first bg-dark">TIC <span>TAC</span> TOE</h2>
+<p class="text-dark">Sign in above.</p>
+</div>
+<div class="theBeef">
+<div class="stats">
+<!-- <button type="button" id="gamepop" class="btn btn-lg btn-danger" data-toggle="popover" title="Game Stats" data-content="You have played games">Click for Games Played</button> -->
+  <!-- <button class="btn btn-dark btn-md popover1" data-toggle="popover">Click Me For Games Played</button> -->
+  <button class="btn btn-dark btn-md stats1">Click Me For Games Played</button>
+  <div class="gamesPlayedTotal"></div>
+</div>
+
+    <section class="container">
+      <div class="row">
+
+        <div class="title-first col-12 text-center bg-dark"><h1>TIC<span id="loggedspan">TAC</span>TOE</h1> </div>
+      </div>
+      <div class="row title">
+        <div class=" col-12 text-center"><h2 id="game-result"></h2></div>
+        <div class="col-12 text-center"><h5 id="currentPlayer">click the start button</h5></div>
+        <form id="refresh">
+        <button class="btn btn-sm btn-outline-secondary form-control" type="submit">Start Game</button>
+        </form>
+          <form id="get-games">
+      <!-- <button class="btn btn-sm btn-outline-secondary form-control" type="submit">get games</button> -->
+          </form>
+        <!-- <h3 id="display-result"></h3> -->
+      </div>
+        <div class="row game">
+          <div id="0" class="col-4 box"></div>
+          <div id="1" class="col-4 box"></div>
+          <div id="2" class="col-4 box"></div>
+          <div id="3" class="col-4 box"></div>
+          <div id="4" class="col-4 box"></div>
+          <div id="5" class="col-4 box"></div>
+          <div id="6" class="col-4 box"></div>
+          <div id="7" class="col-4 box"></div>
+          <div id="8" class="col-4 box"></div>
+      </div>
+    </section>
+</div>
+
+    </body>
+</html>
