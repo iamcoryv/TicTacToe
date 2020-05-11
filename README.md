@@ -2,6 +2,8 @@
   This game is a clean, simple, TicTacToe game with individual accounts for each user. 
   Play with yourself or with a friend by your side. 
   
+  Deployed at: https://iamcoryv.github.io/TicTacToe/
+  
   # Technology Used
   JavaScript, jQuery, AJAX, Html CSS, Bootstrap, Github
   
